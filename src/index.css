@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ol {
+    @apply list-decimal;
+    @apply ml-10;
+}
+
+pre {
+    @apply bg-black;
+    @apply text-white;
+    @apply max-h-[400px];
+    @apply p-2;
+    @apply overflow-y-scroll;
+    @apply m-2;
+    @apply text-xs;
+}
+
+p img {
+    @apply mx-auto my-auto block;
+}
+
+p a {
+    @apply underline;
+}
+
+code {
+    @apply overflow-auto; 
+    @apply whitespace-normal;
+    @apply break-words;
+    @apply bg-slate-200;
+}
+
