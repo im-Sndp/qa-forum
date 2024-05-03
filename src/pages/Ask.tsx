@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import { TagsInput } from "react-tag-input-component";
 import 'react-quill/dist/quill.snow.css';
@@ -126,9 +126,9 @@ function Altert(){
                             axios.post(`${BACKEND_URL}/api/v1/questions`,{
                                 "title":title,
                                 "content":value
-                            }, { headers }).then((response)=>{
+                            }, { headers }).then(()=>{
                                 navigate("/questions")
-                            }).catch((error) => {
+                            }).catch(() => {
                                 setLogout(true);
                             });
                             }catch(e){

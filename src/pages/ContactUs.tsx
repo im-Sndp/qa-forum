@@ -36,7 +36,7 @@ export const ContactUs = () => {
                         <div className="flex items-center mt-5">
                             <svg className="h-6 mr-2 text-indigo-600" fill="currentColor" version="1.1" id="Capa_1"
                                 xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                viewBox="0 0 60.002 60.002" style={{ enableBackground: 'new 0 0 60.002 60.002;' }} xmlSpace="preserve">
+                                viewBox="0 0 60.002 60.002" xmlSpace="preserve">
                                 <g>
                                     <path d="M59.002,37.992c-3.69,0-6.693-3.003-6.693-6.693c0-0.553-0.447-1-1-1s-1,0.447-1,1c0,4.794,3.899,8.693,8.693,8.693c0.553,0,1-0.447,1-1S59.554,37.992,59.002,37.992z">
                                     </path>
@@ -55,7 +55,7 @@ export const ContactUs = () => {
                         <div className="flex items-center mt-5">
                             <svg className="h-6 mr-2 text-indigo-600" fill="currentColor" version="1.1" id="Capa_1"
                                 xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                viewBox="0 0 300.988 300.988" style={{ enableBackground: 'new 0 0 300.988 300.988;' }}
+                                viewBox="0 0 300.988 300.988"
                                 xmlSpace="preserve">
                                 <g>
                                     <g>
@@ -83,6 +83,7 @@ export const ContactUs = () => {
                                 <input
                                     className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                     id="grid-first-name" type="text" placeholder="Firstname" />
+
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"

@@ -19,7 +19,7 @@ export const Home = () => {
         axios.get(`${BACKEND_URL}/api/v1/questions`,{ headers }).then(response =>{
             setQuestions(response.data.questions);
             setLoading(false)
-        }).catch((error)=>{
+        }).catch(()=>{
             window.location.href = '/';
         })}catch(error){
             window.location.href = '/';

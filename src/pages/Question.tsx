@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { BACKEND_URL } from "../config";
 import ReactHtmlParser from "react-html-parser";
 import ReactQuill from 'react-quill';
@@ -14,12 +14,13 @@ const headers = {
     'Content-Type': 'application/json'
 };
 
-const formatDate = (dateString) => {
+const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    const options = { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+    const options: Intl.DateTimeFormatOptions = { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' };
     const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
     return formattedDate.replace(',', ' at');
 };
+
 
 const CommentSection = ({ comments }) => {
     return (
@@ -45,16 +46,56 @@ const CommentInput = ({ value, setValue, onSubmit }) => {
 };
 
 const Question = () => {
+    
+    interface Author {
+        id: string;
+        firstname: string;
+        lastname: string;
+    }
+    
+    interface AnswerComment {
+        id: string;
+        content: string;
+        createdAt: string;
+        author: Author;
+    }
+    
+    interface Answer {
+        id: string;
+        content: string;
+        createdAt: string;
+        author: Author;
+        answerComment: AnswerComment[];
+    }
+    
+    interface QuestionComment {
+        id: string;
+        content: string;
+        createdAt: string;
+        author: Author;
+    }
+    
+    interface Question {
+        id: string;
+        title: string;
+        content: string;
+        publishedDate: string;
+        author: Author;
+        answer: Answer[];
+        questionComment: QuestionComment[];
+    }    
+    
     const id = useParams()["id"];
-    const [question, setQuestion] = useState([]);
+    const [question, setQuestion] = useState<Question | null>(null);;
     const [loading, setLoading] = useState(true);
     const [value, setValue] = useState('');
     const [qcomment, setQComment] = useState('');
     const [click, setClick] = useState(false);
     const [logout, setLogout] = useState(false);
-    const [aComment, setAcomment] = useState("");
     const [comment, setComment] = useState(false);
     const [list, setList] = useState([]);
+
+
 
     useEffect(() => {
         try{
@@ -63,21 +104,21 @@ const Question = () => {
                     setQuestion(response.data.question);
                     setList(Array(parseInt(response.data.question.answer.length)).fill(''));
                     setLoading(false);
-                }).catch(error => {
+                }).catch( ()=> {
                     window.location.href = '/';
                 });}
         catch(error){
             window.location.href = '/';
         }
     }, [click]);
-
+    
     const handleInput = (e, index) => {
         const newArray = [...list];
         newArray[index] = e.target.value;
         setList(newArray);
     };
 
-    const removeInput = (index) => {
+    const removeInput = (index)  => {
         const newArray = [...list];
         newArray[index] = "";
         setList(newArray);
@@ -90,21 +131,6 @@ const Question = () => {
                     if (response.status === 200) {
                         setClick(!click);
                         setQComment("");
-                    }
-                });
-        }
-    };
-
-    const handleAnswerCommentSubmit = (answerId) => {
-        if (aComment.length > 0) {
-            setComment(true);
-            axios.post(`${BACKEND_URL}/api/v1/comment/answer`, { "content": aComment, "answerId": answerId }, { headers })
-                .then((response) => {
-                    if (response.status === 200) {
-                        setClick(!click);
-                        removeInput("");
-                        setAcomment("");
-                        setComment(false);
                     }
                 });
         }
@@ -218,7 +244,6 @@ const Question = () => {
                                             if(response.status == 200){
                                                 setClick(!click);
                                                 removeInput("");
-                                                setAcomment("");
                                                 setComment(false);
                                             }
                                         })
