@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BACKEND_URL } from "../config";
-import ReactHtmlParser from "react-html-parser";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { modules } from "../components/quillModules";
@@ -205,7 +204,7 @@ const Question = () => {
                         </svg>
 
                     </div>
-                    <div className="pl-1">{ReactHtmlParser(question.content)}</div>
+                    <div className="pl-1"><div dangerouslySetInnerHTML={{ __html: question.content }} /></div>
                 </div>
                 <CommentSection comments={question.questionComment} />
                 <CommentInput value={qcomment} setValue={setQComment} onSubmit={handleQuestionCommentSubmit} />
@@ -226,7 +225,8 @@ const Question = () => {
                                     </svg>
 
                                 </div>
-                                <div className="w-full">{ReactHtmlParser(answer.content)}</div>
+                                <div className="w-full">
+                                <div dangerouslySetInnerHTML={{ __html: answer.content }} /></div>
                             </div>
                             <CommentSection comments={answer.answerComment} />
 
@@ -263,10 +263,10 @@ const Question = () => {
                     <button className="bg-green-700 mt-4 lg:mt-2 text-white px-2 text-sm py-1" onClick={() => {
                         try {
                             axios.post(`${BACKEND_URL}/api/v1/answer/${id}`, { "content": value }, { headers })
-                                .then((response) => {
+                                .then(() => {
                                     setClick(!click);
                                     setValue("");
-                                }).catch((error) => {
+                                }).catch(() => {
                                     setLogout(true);
                                 });
                         } catch (e) {
